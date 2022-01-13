@@ -1,5 +1,5 @@
 name: Continuous Integration
-on: [push, pull_request]
+on: [push]
 jobs:
   build:
     name: ${{ matrix.config.name }}
@@ -12,7 +12,6 @@ jobs:
             name: "Windows Latest MSVC", artifact: "Windows-MSVC.tar.xz",
             os: windows-latest, generator: "Unix Makefiles",
             build_type: "Release", build_tests: "true", cc: "cl", cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
         - {
             name: "Windows Latest MinGW", artifact: "Windows-MinGW.tar.xz",
@@ -25,7 +24,7 @@ jobs:
             build_type: "Release", build_tests: "true", cc: "gcc", cxx: "g++"
           }
         - {
-            name: "macOS Latest Clang", artifact: "macOS.tar.xz",
+            name: "MacOS Latest Clang", artifact: "macOS.tar.xz",
             os: macos-latest, generator: "Unix Makefiles",
             build_type: "Release", build_tests: "true", cc: "clang", cxx: "clang++"
           }
@@ -44,7 +43,6 @@ jobs:
           choco install ninja cmake
           ninja --version
           cmake --version
-        # cmd "${{ matrix.config.environment_script }}"
 
       - name: Install Ubuntu dependencies
         if: startsWith(matrix.config.name, 'ubuntu')
@@ -81,4 +79,4 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        run: ./out/src/tests/${{ matrix.config.build_type }}/tests
+        run: ./out/src/tests/tests
