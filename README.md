@@ -1,4 +1,4 @@
-![Continuous Integration](https://github.com/Pnikanti/gmath/actions/workflows/continuous-integration.yml/badge.svg?event=push)
+[![Continuous Integration](https://github.com/Pnikanti/gmath/actions/workflows/continuous-integration.yml/badge.svg?event=push)](https://github.com/Pnikanti/gmath/actions/workflows/continuous-integration.yml)
 # gmath
 
 Gmath (written as gmath) library is solely created as an exercise for following things:
