@@ -35,7 +35,7 @@ struct vec2
 
 	// Methods
 
-	T length()
+	T length() const
 	{
 		return sqrt(
 			x * x +
@@ -43,7 +43,7 @@ struct vec2
 		);
 	}
 
-	vec2<T> normalized()
+	vec2<T> normalized() const
 	{
 		return vec2<T>(*this / length());
 	}
@@ -57,7 +57,7 @@ struct vec2
 
 	// Operator overloads
 
-	T operator[](int index)
+	T operator[](int index) const
 	{
 		OUTOFBOUNDSCHECK(sizeof(T) * index, bounds);
 		return _a[index];
@@ -69,7 +69,7 @@ struct vec2
 		return (x == a.x) && (y == a.y);
 	}
 
-	vec2<T> operator+ (const vec2<T>& a)
+	vec2<T> operator+ (const vec2<T>& a) const
 	{
 		return vec2<T>(
 			x + a.x,
@@ -78,7 +78,7 @@ struct vec2
 	}
 
 	// Scalar operation
-	vec2<T> operator+ (const T& a)
+	vec2<T> operator+ (const T& a) const
 	{
 		return vec2<T>(
 			x + a,
@@ -86,7 +86,7 @@ struct vec2
 		);
 	}
 
-	vec2<T> operator- (const vec2<T>& a)
+	vec2<T> operator- (const vec2<T>& a) const
 	{
 		return vec2<T>(
 			x - a.x,
@@ -95,7 +95,7 @@ struct vec2
 	}
 
 	// Scalar operation
-	vec2<T> operator- (const T& a)
+	vec2<T> operator- (const T& a) const
 	{
 		return vec2<T>(
 			x - a,
@@ -103,7 +103,7 @@ struct vec2
 		);
 	}
 
-	vec2<T> operator/ (const vec2<T>& a)
+	vec2<T> operator/ (const vec2<T>& a) const
 	{
 		return vec2<T>(
 			x / a.x, 
@@ -112,7 +112,7 @@ struct vec2
 	}
 
 	// Scalar operation
-	vec2<T> operator/ (const T& a)
+	vec2<T> operator/ (const T& a) const
 	{
 		return vec2<T>(
 			x / a,
@@ -120,7 +120,7 @@ struct vec2
 		);
 	}
 
-	vec2<T> operator* (const vec2<T>& a)
+	vec2<T> operator* (const vec2<T>& a) const
 	{
 		return vec2<T>(
 			x * a.x,
@@ -129,7 +129,7 @@ struct vec2
 	}
 
 	// Scalar operation
-	vec2<T> operator* (const T& a)
+	vec2<T> operator* (const T& a) const
 	{
 		return vec2<T>(
 			x * a,
@@ -167,7 +167,7 @@ struct vec3
 
 	// Methods
 
-	T length()
+	T length() const
 	{
 		return sqrt(
 			x * x +
@@ -176,7 +176,7 @@ struct vec3
 		);
 	}
 
-	vec3<T> normalized()
+	vec3<T> normalized() const
 	{
 		return vec3<T>(*this / length());
 	}
@@ -190,13 +190,18 @@ struct vec3
 
 	// Operator overloads
 
-	T operator[](int index)
+	T operator[](int index) const
 	{
 		OUTOFBOUNDSCHECK(sizeof(T) * index, bounds);
 		return _a[index];
 	}
 
-	vec3<T> operator+ (const vec3<T>& a)
+	bool operator== (const vec3<T>& a) const
+	{
+		return (x == a.x) && (y == a.y) && (z == a.z);
+	}
+
+	vec3<T> operator+ (const vec3<T>& a) const
 	{
 		return vec3<T>(
 			x + a.x,
@@ -206,7 +211,7 @@ struct vec3
 	}
 
 	// Scalar operation
-	vec3<T> operator+ (const T& a)
+	vec3<T> operator+ (const T& a) const
 	{
 		return vec3<T>(
 			x + a,
@@ -215,7 +220,7 @@ struct vec3
 		);
 	}
 
-	vec3<T> operator- (const vec3<T>& a)
+	vec3<T> operator- (const vec3<T>& a) const
 	{
 		return vec3<T>(
 			x - a.x,
@@ -225,7 +230,7 @@ struct vec3
 	}
 
 	// Scalar operation
-	vec3<T> operator- (const T& a)
+	vec3<T> operator- (const T& a) const
 	{
 		return vec3<T>(
 			x - a, 
@@ -234,7 +239,7 @@ struct vec3
 		);
 	}
 
-	vec3<T> operator/ (const vec3<T>& a)
+	vec3<T> operator/ (const vec3<T>& a) const
 	{
 		return vec3<T>(
 			x / a.x,
@@ -244,7 +249,7 @@ struct vec3
 	}
 
 	// Scalar operation
-	vec3<T> operator/ (const T& a)
+	vec3<T> operator/ (const T& a) const
 	{
 		return vec3<T>(
 			x / a,
@@ -253,7 +258,7 @@ struct vec3
 		);
 	}
 
-	vec3<T> operator* (const vec3<T>& a)
+	vec3<T> operator* (const vec3<T>& a) const
 	{
 		return vec3<T>(
 			x * a.x,
@@ -263,7 +268,7 @@ struct vec3
 	}
 
 	// Scalar operation
-	vec3<T> operator* (const T& a)
+	vec3<T> operator* (const T& a) const
 	{
 		return vec3<T>(
 			x * a,
@@ -302,7 +307,7 @@ struct vec4
 
 	// Methods 
 
-	T length()
+	T length() const
 	{
 		return sqrt(
 			x * x + 
@@ -312,7 +317,7 @@ struct vec4
 		);
 	}
 
-	vec4<T> normalized()
+	vec4<T> normalized() const
 	{
 		return vec4<T>(*this / length());
 	}
@@ -326,13 +331,18 @@ struct vec4
 
 	// Operator overloads
 
-	T operator[](int index)
+	T operator[](int index) const
 	{
 		OUTOFBOUNDSCHECK(sizeof(T) * index, bounds);
 		return _a[index];
 	}
 
-	vec4<T> operator+ (const vec4<T>& a)
+	bool operator== (const vec4<T>& a) const
+	{
+		return (x == a.x) && (y == a.y) && (z == a.z) && (w == a.w);
+	}
+
+	vec4<T> operator+ (const vec4<T>& a) const
 	{
 		return vec4<T>(
 			x + a.x,
@@ -343,7 +353,7 @@ struct vec4
 	}
 
 	// Scalar operation
-	vec4<T> operator+ (const T& a)
+	vec4<T> operator+ (const T& a) const
 	{
 		return vec4<T>(
 			x + a,
@@ -353,7 +363,7 @@ struct vec4
 		);
 	}
 
-	vec4<T> operator- (const vec4<T>& a)
+	vec4<T> operator- (const vec4<T>& a) const
 	{
 		return vec4<T>(
 			x - a.x,
@@ -364,7 +374,7 @@ struct vec4
 	}
 
 	// Scalar operation
-	vec4<T> operator- (const T& a)
+	vec4<T> operator- (const T& a) const
 	{
 		return vec4<T>(
 			x - a,
@@ -374,7 +384,7 @@ struct vec4
 		);
 	}
 
-	vec4<T> operator/ (const vec4<T>& a)
+	vec4<T> operator/ (const vec4<T>& a) const
 	{
 		return vec4<T>(
 			x / a.x,
@@ -385,7 +395,7 @@ struct vec4
 	}
 
 	// Scalar operation
-	vec4<T> operator/ (const T& a)
+	vec4<T> operator/ (const T& a) const
 	{
 		return vec4<T>(
 			x / a,
@@ -395,7 +405,7 @@ struct vec4
 		);
 	}
 
-	vec4<T> operator* (const vec4<T>& a)
+	vec4<T> operator* (const vec4<T>& a) const
 	{
 		return vec4<T>(
 			x * a.x,
@@ -406,7 +416,7 @@ struct vec4
 	}
 
 	// Scalar operation
-	vec4<T> operator* (const T& a)
+	vec4<T> operator* (const T& a) const
 	{
 		return vec4<T>(
 			x * a,
@@ -465,7 +475,7 @@ struct mat2
 
 	// Operator overloads
 
-	mat2<T> operator+ (const mat2<T>& a)
+	mat2<T> operator+ (const mat2<T>& a) const
 	{
 		return mat2<T>(
 			x.x + a.x.x, y.x + a.y.x,
@@ -474,7 +484,7 @@ struct mat2
 	}
 
 	// Scalar operation
-	mat2<T> operator+ (const T& a)
+	mat2<T> operator+ (const T& a) const
 	{
 		return mat2<T>(
 			x.x + a, y.x + a,
@@ -482,7 +492,7 @@ struct mat2
 		);
 	}
 
-	mat2<T> operator- (const mat2<T>& a)
+	mat2<T> operator- (const mat2<T>& a) const
 	{
 		return mat2<T>(
 			x.x - a.x.x, y.x - a.y.x,
@@ -491,7 +501,7 @@ struct mat2
 	}
 
 	// Scalar operation
-	mat2<T> operator- (const T& a)
+	mat2<T> operator- (const T& a) const
 	{
 		return mat2<T>(
 			x.x - a, y.x - a,
@@ -499,7 +509,7 @@ struct mat2
 		);
 	}
 
-	mat2<T> operator* (const mat2<T>& a)
+	mat2<T> operator* (const mat2<T>& a) const
 	{
 		// Column major product
 
@@ -510,10 +520,8 @@ struct mat2
 	}
 
 	// Scalar operation
-	mat2<T> operator* (const T& a)
+	mat2<T> operator* (const T& a) const
 	{
-		// Column major product
-
 		return mat2<T>(
 			x.x * a, y.x * a,
 			x.y * a, y.y * a
@@ -521,10 +529,8 @@ struct mat2
 	}
 
 	// Scalar operation
-	mat2<T> operator/ (const T& a)
+	mat2<T> operator/ (const T& a) const
 	{
-		// Column major product
-
 		return mat2<T>(
 			x.x / a, y.x / a,
 			x.y / a, y.y / a
@@ -536,7 +542,7 @@ struct mat2
 		return (x == a.x) && (y == a.y);
 	}
 
-	vec2<T> operator[](int index)
+	vec2<T> operator[](int index) const
 	{
 		OUTOFBOUNDSCHECK(sizeof(T) * index, bounds / 2);
 		return _v[index];
@@ -578,7 +584,7 @@ struct mat3
 
 	// Operator overloads
 
-	mat3<T> operator+ (const mat3<T>& a)
+	mat3<T> operator+ (const mat3<T>& a) const
 	{
 		return mat3<T>(
 			x.x + a.x.x, y.x + a.y.x, + z.x + a.z.x,
@@ -587,11 +593,18 @@ struct mat3
 		);
 	}
 
-	vec3<T> operator[](int index)
+	vec3<T> operator[](int index) const
 	{
 		OUTOFBOUNDSCHECK(sizeof(T) * index, bounds / 3);
 		return _v[index];
 	}
+
+
+	bool operator== (const mat3<T>& a) const
+	{
+		return (x == a.x) && (y == a.y) && (z == a.z);
+	}
+
 
 	friend std::ostream& operator<< (std::ostream& stream, const mat3<T>& a)
 	{
