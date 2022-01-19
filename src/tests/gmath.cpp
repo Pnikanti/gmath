@@ -195,63 +195,97 @@ TEST_CASE("2x2 matrix calculations", "[!mayfail]")
 	}
 }
 
-// WORK IN PROGRESS
-//TEST_CASE("3x3 matrix calculations", "[!mayfail]")
-//{
-//
-//	SECTION("Sum of two matrices should provide correct output")
-//	{
-//		mat3f a = mat3f(0.5f, 0.1f, 0.2f,
-//						0.3f, 0.2f, 0.5f,
-//						0.2f, 0.5f, 0.1f) +
-//				  mat3f(0.5f, 0.9f, 0.8f,
-//						0.2f, 0.3f, 0.7f,
-//						0.7f, 0.4f, 0.8f);
-//
-//		REQUIRE(a == mat3f(1.0f));
-//	}
-//
-//	SECTION("Difference of two matrices should provide correct output")
-//	{
-//		mat3f a = mat3f(1.5f, 2.2f, 10.2f, 5.3f) -
-//			mat3f(0.5f, 1.2f, 9.2f, 4.3f);
-//
-//		REQUIRE(a == mat3f(1.0f));
-//	}
-//
-//	SECTION("Product of two matrices should provide correct output")
-//	{
-//		mat3f a = mat3f(1.5f, 2.2f, 10.2f, 5.3f) *
-//			mat3f(0.5f, 1.2f, 9.2f, 4.3f);
-//
-//		REQUIRE(a == mat3f(12.99f, 7.46f, 57.66f, 43.03f));
-//	}
-//
-//	SECTION("Sum of matrix and scalar should provide correct output")
-//	{
-//		mat3f a = mat3f(1.5f, 2.2f, 10.2f, 5.3f) + 1.0f;
-//
-//		REQUIRE(a == mat3f(2.5f, 3.2f, 11.2f, 6.3f));
-//	}
-//
-//	SECTION("Difference of matrix and scalar should provide correct output")
-//	{
-//		mat3f a = mat3f(1.5f, 2.2f, 10.2f, 5.3f) - 1.0f;
-//
-//		REQUIRE(a == mat3f(0.5f, 1.2f, 9.2f, 4.3f));
-//	}
-//
-//	SECTION("Quotient of matrix and scalar should provide correct output")
-//	{
-//		mat3f a = mat3f(1.5f, 2.2f, 10.2f, 5.3f) / 2.0f;
-//
-//		REQUIRE(a == mat3f(0.75f, 1.1f, 5.1f, 2.65f));
-//	}
-//
-//	SECTION("Product of matrix and scalar should provide correct output")
-//	{
-//		mat3f a = mat3f(1.5f, 2.2f, 10.2f, 5.3f) * 2.0f;
-//
-//		REQUIRE(a == mat3f(3.0f, 4.4f, 20.4f, 10.6f));
-//	}
-//}
+TEST_CASE("3x3 matrix calculations", "[!mayfail]")
+{
+
+	SECTION("Sum of two matrices should provide correct output")
+	{
+		mat3f a = mat3f(0.5f, 0.1f, 0.2f,
+						0.3f, 0.2f, 0.5f,
+						0.2f, 0.5f, 0.1f) +
+				  mat3f(0.5f, 0.9f, 0.8f,
+						0.2f, 0.3f, 0.7f,
+						0.7f, 0.4f, 0.8f);
+
+		REQUIRE(a == mat3f(1.0f, 1.0f, 1.0f,
+						   0.5f, 0.5f, 1.2f,
+						   0.9f, 0.9f, 0.9f
+		));
+	}
+
+	SECTION("Difference of two matrices should provide correct output")
+	{
+		mat3f a = mat3f(1.5f, 1.1f, 1.2f,
+						1.3f, 1.2f, 1.5f,
+						1.2f, 1.5f, 1.1f) -
+				  mat3f(0.5f, 0.1f, 0.2f,
+					    0.3f, 0.2f, 0.5f,
+					    0.2f, 0.5f, 0.1f);
+
+		REQUIRE(a == mat3f(1.0f));
+	}
+
+	SECTION("Product of two matrices should provide correct output")
+	{
+		mat3f a = mat3f(15.5f, 11.1f, 2.2f,
+						4.3f, 22.2f, 8.5f,
+						5.2f, 33.5f, 5.1f) *
+				  mat3f(2.5f, 1.1f, 25.2f,
+						2.3f, 4.2f, 32.5f,
+						5.2f, 7.5f, 12.1f);
+
+		REQUIRE(a == mat3f(
+			174.52f, 896.37f, 143.37f,
+			222.71f, 1207.52f, 206.51f,
+			175.77f, 629.57f, 136.9f
+		));
+	}
+
+	SECTION("Sum of matrix and scalar should provide correct output")
+	{
+		mat3f a = mat3f(0.5f, 0.1f, 0.2f,
+						0.3f, 0.2f, 0.5f,
+						0.2f, 0.5f, 0.1f) + 1.0f;
+
+		REQUIRE(a == mat3f(1.5f, 1.1f, 1.2f,
+						   1.3f, 1.2f, 1.5f,
+						   1.2f, 1.5f, 1.1f
+		));
+	}
+
+	SECTION("Difference of matrix and scalar should provide correct output")
+	{
+		mat3f a = mat3f(1.5f, -2.2f, 10.2f,
+						5.3f,  2.3f, 11.1f,
+					   -2.2f,  4.2f, 100.0f) - 1.0f;
+
+		REQUIRE(a == mat3f(0.5f, -3.2f, 9.2f, 
+						   4.3f, 1.3f, 10.1f,
+						  -3.2f, 3.2f, 99.0f
+		));
+	}
+
+	SECTION("Quotient of matrix and scalar should provide correct output")
+	{
+		mat3f a = mat3f(5.5f, 4.2f, -10.2f, 
+						0.5f, 7.7f,  1.5f,
+					   -5.0f, 3.0f,  100.0f) / 2.0f;
+
+		REQUIRE(a == mat3f(2.75f, 2.1f, -5.1f,
+						   0.25f, 3.85f, 0.75f,
+						  -2.5f,  1.5f,  50.0f
+		));
+	}
+
+	SECTION("Product of matrix and scalar should provide correct output")
+	{
+		mat3f a = mat3f(5.5f, 4.2f, -10.2f,
+						0.5f, 7.7f,  1.5f,
+					   -5.0f, 3.0f,  100.0f) * 2.0f;
+
+		REQUIRE(a == mat3f(11.0f, 8.4f,  -20.4f,
+						   1.0f,  15.4f,  3.0f,
+						  -10.0f, 6.0f,   200.0f
+		));
+	}
+}

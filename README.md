@@ -12,12 +12,10 @@ Gmath (written as gmath) library is solely created as an exercise for following 
 
 References:
 
-* Maths:
-https://github.com/BSVino/MathForGameDevelopers
+* Maths: https://github.com/BSVino/MathForGameDevelopers
 
-* CMake:
-https://github.com/ourarash/cmake-catch-vsc-template
-http://mariobadr.com/creating-a-header-only-library-with-cmake.html
+* CMake: https://github.com/ourarash/cmake-catch-vsc-template, http://mariobadr.com/creating-a-header-only-library-with-cmake.html
 
-* SIMD:
-https://stackoverflow.blog/2020/07/08/improving-performance-with-simd-intrinsics-in-three-use-cases/
+* SIMD: https://stackoverflow.blog/2020/07/08/improving-performance-with-simd-intrinsics-in-three-use-cases/
+
+* Floating point comparisons https://floating-point-gui.de/errors/comparison/

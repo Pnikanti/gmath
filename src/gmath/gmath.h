@@ -8,8 +8,23 @@
 */
 
 
-// Macros
+// Globals
 
+// Approximate equality for floating point numbers
+template <typename T>
+bool APPROXEQ(T a, T b)
+{
+	T x = abs(a);
+	T y = abs(b);
+	T dxy = abs(a - b);
+
+	if (a == b)
+		return true;
+	else if (a == 0 || b == 0 || dxy < std::numeric_limits<T>::min())
+		return dxy < (std::numeric_limits<T>::epsilon() * std::numeric_limits<T>::min());
+	else
+		return dxy / (x + y) < std::numeric_limits<T>::epsilon();
+}
 #ifdef DEBUG
 void OUTOFBOUNDSCHECK(int index, int bounds)
 {
@@ -66,7 +81,7 @@ struct vec2
 
 	bool operator== (const vec2<T>& a) const
 	{
-		return (x == a.x) && (y == a.y);
+		return APPROXEQ(x, a.x) && APPROXEQ(y, a.y);
 	}
 
 	vec2<T> operator+ (const vec2<T>& a) const
@@ -198,7 +213,7 @@ struct vec3
 
 	bool operator== (const vec3<T>& a) const
 	{
-		return (x == a.x) && (y == a.y) && (z == a.z);
+		return APPROXEQ(x, a.x) && APPROXEQ(y, a.y) && APPROXEQ(z, a.z);
 	}
 
 	vec3<T> operator+ (const vec3<T>& a) const
@@ -339,7 +354,7 @@ struct vec4
 
 	bool operator== (const vec4<T>& a) const
 	{
-		return (x == a.x) && (y == a.y) && (z == a.z) && (w == a.w);
+		return APPROXEQ(x, a.x) && APPROXEQ(y, a.y) && APPROXEQ(z, a.z) && APPROXEQ(w, a.w);
 	}
 
 	vec4<T> operator+ (const vec4<T>& a) const
@@ -587,9 +602,71 @@ struct mat3
 	mat3<T> operator+ (const mat3<T>& a) const
 	{
 		return mat3<T>(
-			x.x + a.x.x, y.x + a.y.x, + z.x + a.z.x,
-			x.y + a.x.y, y.y + a.y.y, + z.y + a.z.y,
-			x.z + a.x.z, y.z + a.y.z, + z.z + a.z.z
+			x.x + a.x.x, y.x + a.y.x, z.x + a.z.x,
+			x.y + a.x.y, y.y + a.y.y, z.y + a.z.y,
+			x.z + a.x.z, y.z + a.y.z, z.z + a.z.z
+		);
+	}
+
+	// Scalar operation
+	mat3<T> operator+ (const T& a) const
+	{
+		return mat3<T>(
+			x.x + a, y.x + a, z.x + a,
+			x.y + a, y.y + a, z.y + a,
+			x.z + a, y.z + a, z.z + a
+		);
+	}
+
+	mat3<T> operator- (const mat3<T>& a) const
+	{
+		return mat3<T>(
+			x.x - a.x.x, y.x - a.y.x, z.x - a.z.x,
+			x.y - a.x.y, y.y - a.y.y, z.y - a.z.y,
+			x.z - a.x.z, y.z - a.y.z, z.z - a.z.z
+		);
+	}
+
+	// Scalar operation
+	mat3<T> operator- (const T& a) const
+	{
+		return mat3<T>(
+			x.x - a, y.x - a, z.x - a,
+			x.y - a, y.y - a, z.y - a,
+			x.z - a, y.z - a, z.z - a
+		);
+	}
+
+	mat3<T> operator* (const mat3<T>& a) const
+	{
+		// Column major product
+
+		return mat3<T>(
+			(x.x * a.x.x + x.y * a.y.x + x.z * a.z.x), (y.x * a.x.x + y.y * a.y.x + y.z * a.z.x), (z.x * a.x.x + z.y * a.y.x + z.z * a.z.x),
+			(x.x * a.x.y + x.y * a.y.y + x.z * a.z.y), (y.x * a.x.y + y.y * a.y.y + y.z * a.z.y), (z.x * a.x.y + z.y * a.y.y + z.z * a.z.y),
+			(x.x * a.x.z + x.y * a.y.z + x.z * a.z.z), (y.x * a.x.z + y.y * a.y.z + y.z * a.z.z), (z.x * a.x.z + z.y * a.y.z + z.z * a.z.z)
+		);
+	}
+
+	// Scalar operation
+	mat3<T> operator* (const T& a) const
+	{
+		// Column major product
+
+		return mat3<T>(
+			x.x * a, y.x * a, z.x * a,
+			x.y * a, y.y * a, z.y * a,
+			x.z * a, y.z * a, z.z * a
+		);
+	}
+
+	// Scalar operation
+	mat3<T> operator/ (const T& a) const
+	{
+		return mat3<T>(
+			x.x / a, y.x / a, z.x / a,
+			x.y / a, y.y / a, z.y / a,
+			x.z / a, y.z / a, z.z / a
 		);
 	}
 
